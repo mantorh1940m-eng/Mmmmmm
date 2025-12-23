@@ -75,3 +75,26 @@ li {
     color: white;
     border: 1px solid #555;
 }
+/* ألوان الأولوية */
+.priority-high { border-right: 5px solid #ff4d4d !important; }
+.priority-med { border-right: 5px solid #ffc107 !important; }
+.priority-low { border-right: 5px solid #28a745 !important; }
+
+.task-date {
+    font-size: 0.7rem;
+    color: #888;
+    display: block;
+}
+
+.task-info {
+    display: flex;
+    flex-direction: column;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
