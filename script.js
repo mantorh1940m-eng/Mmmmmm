@@ -50,3 +50,49 @@ function removeLocalTask(task) {
     tasks.splice(taskIndex, 1);
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
+
+// تحديث وظيفة إنشاء المهمة لتشمل الأولوية والتاريخ
+function createTaskElement(taskText, priority, date = new Date().toLocaleString('ar-EG')) {
+    const li = document.createElement('li');
+    li.classList.add(`priority-${priority}`); // إضافة كلاس الأولوية
+    
+    li.innerHTML = `
+        <div class="task-info">
+            <strong>${taskText}</strong>
+            <span class="task-date">${date}</span>
+        </div>
+        <span class="delete-btn">حذف</span>
+    `;
+
+    li.querySelector('.delete-btn').addEventListener('click', () => {
+        li.remove();
+        // هنا يمكنك إضافة كود حذف من LocalStorage كما في السابق
+    });
+
+    taskList.appendChild(li);
+}
+
+// إضافة وظيفة البحث (Live Search)
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('keyup', () => {
+    const term = searchInput.value.toLowerCase();
+    const tasks = taskList.getElementsByTagName('li');
+    
+    Array.from(tasks).forEach(task => {
+        const text = task.firstElementChild.textContent;
+        if (text.toLowerCase().indexOf(term) != -1) {
+            task.style.display = 'flex';
+        } else {
+            task.style.display = 'none';
+        }
+    });
+});
+
+// تحديث زر الإضافة ليقرأ الأولوية
+addBtn.addEventListener('click', () => {
+    const priority = document.getElementById('priorityInput').value;
+    if (input.value !== "") {
+        createTaskElement(input.value, priority);
+        input.value = "";
+    }
+});
